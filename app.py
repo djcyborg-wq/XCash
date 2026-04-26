@@ -6,7 +6,7 @@ Startbefehl: streamlit run app.py
 Abhängigkeiten: pip install streamlit pandas plotly
 """
 
-import sys, os, json, subprocess
+import sys, os, json, subprocess, shutil
 import warnings
 from pathlib import Path
 warnings.filterwarnings('ignore')
@@ -39,6 +39,7 @@ CATEGORY_LABELS = {
     'insurance.car': 'Kfz-Versicherung', 'insurance.health': 'Krankenversicherung', 'transport.fuel': 'Tanken',
     'transport.public': 'ÖPNV / Bahn', 'transport.parking': 'Parken', 'transport.maintenance': 'Wartung',
     'dining.bakery': 'Bäckerei', 'dining.restaurant': 'Restaurant / Café', 'dining.fast_food': 'Fast Food',
+    'dining.school_meals': 'Schul- / Kitaessen',
     'entertainment.streaming': 'Streaming', 'entertainment.travel': 'Reise / Urlaub',
     'entertainment.sports': 'Sport / Fitness', 'entertainment.hobby': 'Hobby / Freizeit',
     'health.pharmacy': 'Apotheke', 'health.doctor': 'Arzt / Klinik', 'finance.investment': 'Investitionen / Depot',
@@ -52,6 +53,7 @@ CATEGORY_LABELS = {
     'payment.provider': 'Zahlungsdienstleister',
     'utilities.telecom': 'Telekommunikation',
     'transport.maintenance': 'Werkstatt / Wartung',
+    'personal.haircare': 'Friseur / Haare',
 }
 
 FREQUENCY_LABELS = {'monthly': 'Monatlich', 'weekly': 'Wöchentlich', 'irregular': 'Unregelmäßig'}
@@ -70,6 +72,7 @@ COMPACT_CATEGORY_LABELS = {
     'housing': 'Wohnen',
     'insurance': 'Versicherungen',
     'dining': 'Essen & Trinken',
+    'personal': 'Persoenliche Pflege',
     'entertainment': 'Freizeit',
     'subscriptions': 'Abos',
     'payment': 'Zahlungen',
@@ -201,28 +204,84 @@ def ensure_data_structure():
     Path("data").mkdir(exist_ok=True)
     Path("data/incoming").mkdir(exist_ok=True)
     Path("outputs").mkdir(exist_ok=True)
+    Path("data/users").mkdir(exist_ok=True)
+    Path("outputs/users").mkdir(exist_ok=True)
+    # Migration: bestehendes "default"-Profil auf "mario" umstellen.
+    old_data = Path("data/users/default")
+    new_data = Path("data/users/mario")
+    if old_data.exists() and not new_data.exists():
+        old_data.rename(new_data)
+    old_output = Path("outputs/users/default")
+    new_output = Path("outputs/users/mario")
+    if old_output.exists() and not new_output.exists():
+        old_output.rename(new_output)
+    # Einmalige Migration: vorhandene Rohdateien in das Default-Profil uebernehmen.
+    default_incoming = Path("data/users/mario/incoming")
+    default_incoming.mkdir(parents=True, exist_ok=True)
+    legacy_incoming = Path("data/incoming")
+    if legacy_incoming.exists():
+        has_default_csv = any(default_incoming.glob("*.csv"))
+        if not has_default_csv:
+            for f in legacy_incoming.glob("*.csv"):
+                target = default_incoming / f.name
+                if not target.exists():
+                    target.write_bytes(f.read_bytes())
 
-def run_pipeline():
+def normalize_profile_id(name: str) -> str:
+    raw = (name or "").strip().lower()
+    cleaned = "".join(ch if ch.isalnum() or ch in ("-", "_") else "_" for ch in raw)
+    cleaned = cleaned.strip("_")
+    if cleaned == "default":
+        return "mario"
+    return cleaned or "mario"
+
+def display_profile_name(profile_id: str) -> str:
+    pid = normalize_profile_id(profile_id)
+    return pid[:1].upper() + pid[1:] if pid else "Mario"
+
+def profile_paths(profile_id: str):
+    pid = normalize_profile_id(profile_id)
+    data_dir = Path("data/users") / pid
+    incoming_dir = data_dir / "incoming"
+    output_dir = Path("outputs/users") / pid
+    return pid, data_dir, incoming_dir, output_dir
+
+def list_profiles():
+    base = Path("data/users")
+    if not base.exists():
+        return []
+    return sorted([p.name for p in base.iterdir() if p.is_dir()])
+
+def run_pipeline(profile_id: str):
     """Führt die Pipeline aus und gibt (ok, message) zurueck."""
+    pid, data_dir, incoming_dir, output_dir = profile_paths(profile_id)
+    data_dir.mkdir(parents=True, exist_ok=True)
+    incoming_dir.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     try:
         result = subprocess.run(
-            [sys.executable, "src/run_pipeline.py"],
+            [
+                sys.executable, "src/run_pipeline.py",
+                "--data-dir", str(data_dir),
+                "--output-dir", str(output_dir)
+            ],
             capture_output=True,
             text=True,
             cwd=os.getcwd(),
             timeout=180
         )
         if result.returncode == 0:
-            return True, "Pipeline erfolgreich ausgeführt."
+            return True, f"Pipeline erfolgreich ausgeführt (Profil: {pid})."
         msg = (result.stderr or result.stdout or "Unbekannter Fehler").strip()
         return False, msg[-1500:]
     except Exception as e:
         return False, str(e)
 
 @st.cache_data
-def load_data():
+def load_data(profile_id: str):
+    pid, data_dir, incoming_dir, output_dir = profile_paths(profile_id)
     data = {'transactions': pd.DataFrame(), 'recurring': pd.DataFrame()}
-    fcsv = "data/final_transactions.csv"
+    fcsv = str(data_dir / "final_transactions.csv")
     if os.path.exists(fcsv):
         try:
             df = pd.read_csv(fcsv, encoding='utf-8')
@@ -251,11 +310,11 @@ def load_data():
             elif acols: df['counterparty'] = df[acols[0]]
             data['transactions'] = df
         except Exception as e: st.error(f"Lade-Fehler: {e}")
-    rcsv = "outputs/recurring_payments.csv"
+    rcsv = str(output_dir / "recurring_payments.csv")
     if os.path.exists(rcsv):
         try: data['recurring'] = pd.read_csv(rcsv, encoding='utf-8')
         except: data['recurring'] = pd.DataFrame()
-    acsv = "outputs/anomalies.csv"
+    acsv = str(output_dir / "anomalies.csv")
     if os.path.exists(acsv):
         try: st.session_state['anomalies'] = pd.read_csv(acsv, encoding='utf-8')
         except: st.session_state['anomalies'] = pd.DataFrame()
@@ -731,22 +790,68 @@ def main():
     st.caption("Buchungen, Auswertungen und Detailanalyse")
     ensure_data_structure()
 
+    existing_profiles = list_profiles()
+    if "mario" not in existing_profiles:
+        existing_profiles = ["mario"] + existing_profiles
+    selected_profile = st.sidebar.selectbox(
+        "Benutzer / Konto",
+        options=existing_profiles,
+        index=0,
+        format_func=display_profile_name,
+        key="selected_profile"
+    )
+    new_profile_name = st.sidebar.text_input("Neues Profil anlegen", value="", key="new_profile_name")
+    if st.sidebar.button("Profil erstellen", key="create_profile_btn"):
+        pid = normalize_profile_id(new_profile_name)
+        _, _, incoming_dir, output_dir = profile_paths(pid)
+        incoming_dir.mkdir(parents=True, exist_ok=True)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        st.sidebar.success(f"Profil erstellt: {pid}")
+        st.cache_data.clear()
+        st.rerun()
+    confirm_delete = st.sidebar.checkbox("Löschen bestätigen", key="confirm_delete_profile")
+    if st.sidebar.button("Profil löschen", key="delete_profile_btn"):
+        if selected_profile == "mario":
+            st.sidebar.error("Profil 'mario' kann nicht gelöscht werden.")
+        elif not confirm_delete:
+            st.sidebar.warning("Bitte 'Löschen bestätigen' aktivieren.")
+        else:
+            del_pid, del_data_dir, _, del_output_dir = profile_paths(selected_profile)
+            if del_data_dir.exists():
+                shutil.rmtree(del_data_dir, ignore_errors=True)
+            if del_output_dir.exists():
+                shutil.rmtree(del_output_dir, ignore_errors=True)
+            st.cache_data.clear()
+            st.session_state['selected_profile'] = "mario"
+            st.sidebar.success(f"Profil gelöscht: {del_pid}")
+            st.rerun()
+
+    pid, profile_data_dir, profile_incoming_dir, profile_output_dir = profile_paths(selected_profile)
+    profile_data_dir.mkdir(parents=True, exist_ok=True)
+    profile_incoming_dir.mkdir(parents=True, exist_ok=True)
+    profile_output_dir.mkdir(parents=True, exist_ok=True)
+    st.markdown(
+        f"<div style='margin: 0.8rem 0 1.1rem 0; font-size: 1.2rem; font-weight: 700;'>"
+        f"Aktives Profil: {display_profile_name(pid)}</div>",
+        unsafe_allow_html=True
+    )
+
     with st.expander("📥 CSV-Import", expanded=False):
-        st.caption("Neue Konto-CSV hochladen und Datenbestand direkt aktualisieren.")
+        st.caption(f"Neue Konto-CSV fuer Profil `{pid}` hochladen und Datenbestand direkt aktualisieren.")
         uploaded = st.file_uploader(
             "CSV-Datei auswählen",
             type=["csv"],
             accept_multiple_files=False,
-            key="csv_import_uploader"
+            key=f"csv_import_uploader_{pid}"
         )
         if uploaded is not None:
-            target_path = Path("data/incoming") / uploaded.name
+            target_path = profile_incoming_dir / uploaded.name
             with open(target_path, "wb") as f:
                 f.write(uploaded.getbuffer())
             st.success(f"Datei gespeichert: {target_path}")
-            if st.button("Importieren und Auswertung aktualisieren", key="run_import_pipeline"):
+            if st.button("Importieren und Auswertung aktualisieren", key=f"run_import_pipeline_{pid}"):
                 with st.spinner("Pipeline läuft, bitte kurz warten..."):
-                    ok, msg = run_pipeline()
+                    ok, msg = run_pipeline(pid)
                 if ok:
                     st.cache_data.clear()
                     st.success("Import abgeschlossen. Dashboard wird neu geladen.")
@@ -755,12 +860,12 @@ def main():
                     st.error("Import fehlgeschlagen.")
                     st.code(msg)
 
-    data = load_data()
+    data = load_data(pid)
     df = data.get('transactions', pd.DataFrame())
     recurring_df = data.get('recurring', pd.DataFrame())
     anomalies_df = st.session_state.get('anomalies', pd.DataFrame())
     if df.empty:
-        st.warning("⚠ Keine Transaktionsdaten gefunden. Bitte 'data/final_transactions.csv' prüfen.")
+        st.warning(f"⚠ Keine Transaktionsdaten gefunden. Bitte Import fuer Profil `{pid}` ausführen.")
         return
     filters = make_filters(df)
     filtered_df = apply_filters(df, filters)

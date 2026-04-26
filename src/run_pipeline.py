@@ -11,6 +11,7 @@ Orchestrates the complete analysis pipeline:
 """
 
 import sys
+import argparse
 import logging
 from pathlib import Path
 
@@ -28,19 +29,27 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Run the complete transaction analysis pipeline."""
+    parser = argparse.ArgumentParser(description="Run transaction analysis pipeline.")
+    parser.add_argument("--data-dir", default="data", help="Input/output data directory for this profile.")
+    parser.add_argument("--output-dir", default="outputs", help="Output directory for reports/artifacts.")
+    args = parser.parse_args()
+
+    data_dir = Path(args.data_dir)
+    output_dir = Path(args.output_dir)
+
     logger.info("=" * 60)
     logger.info("Starting Transaction Analysis Pipeline")
     logger.info("=" * 60)
 
     # Ensure output directories exist
-    for d in ['outputs', 'models', 'notebooks']:
-        Path(d).mkdir(exist_ok=True)
+    for d in [output_dir, Path('models'), Path('notebooks'), data_dir]:
+        d.mkdir(exist_ok=True, parents=True)
 
     try:
         # Phase 1: Data Loading
         logger.info("\n--- Phase 1: Data Loading and Standardization ---")
         from data_loader import TransactionDataLoader
-        loader = TransactionDataLoader(data_dir="data")
+        loader = TransactionDataLoader(data_dir=str(data_dir))
         files = loader.discover_files()
         if not files:
             logger.error("No CSV files found in data/ directory")
@@ -53,7 +62,7 @@ def main():
         logger.info(f"Loaded {len(df)} total transactions")
 
         # Save raw combined data
-        raw_output = "data/raw_combined.csv"
+        raw_output = data_dir / "raw_combined.csv"
         df.to_csv(raw_output, index=False)
         logger.info(f"Saved raw combined data to {raw_output}")
 
@@ -68,13 +77,13 @@ def main():
         logger.info(f"Duplicates removed: {clean_report['duplicates_removed']}")
 
         # Save cleaned data
-        clean_output = "data/cleaned_transactions.csv"
+        clean_output = data_dir / "cleaned_transactions.csv"
         df_clean.to_csv(clean_output, index=False)
         logger.info(f"Saved cleaned data to {clean_output}")
 
         # Save cleaning report
         import json
-        with open('outputs/cleaning_report.json', 'w') as f:
+        with open(output_dir / 'cleaning_report.json', 'w') as f:
             json.dump(clean_report, f, indent=2, default=str)
 
         # Phase 3: Exploratory Data Analysis (Basic)
@@ -114,9 +123,9 @@ def main():
             else:
                 return str(obj)
         
-        with open('outputs/eda_results.json', 'w') as f:
+        with open(output_dir / 'eda_results.json', 'w') as f:
             json.dump(convert_to_serializable(eda_results), f, indent=2)
-        logger.info("Saved EDA results to outputs/eda_results.json")
+        logger.info(f"Saved EDA results to {output_dir / 'eda_results.json'}")
 
         # Phase 4: Clustering (Basic categorization already done)
         logger.info("\n--- Phase 4: Transaction Categorization ---")
@@ -128,7 +137,7 @@ def main():
 
         # Phase 5: Save Final Dataset
         logger.info("\n--- Phase 5: Save Processed Dataset ---")
-        final_output = "data/final_transactions.csv"
+        final_output = data_dir / "final_transactions.csv"
         df_clean.to_csv(final_output, index=False)
         logger.info(f"Saved final dataset to {final_output}")
 
@@ -136,7 +145,7 @@ def main():
         logger.info("\n--- Phase 6: Recurring Payments Detection ---")
         from recurring_detector import detect_recurring_payments, save_recurring_payments, print_summary
         recurring_df = detect_recurring_payments(df_clean)
-        save_recurring_payments(recurring_df)
+        save_recurring_payments(recurring_df, output_path=str(output_dir / "recurring_payments.csv"))
         logger.info(f"Detected {len(recurring_df)} recurring payment groups")
 
         # Print summary to console
@@ -146,7 +155,7 @@ def main():
         logger.info("\n--- Phase 7: Anomaly Detection ---")
         from anomaly_detector import detect_all_anomalies, save_anomalies, print_anomaly_summary
         anomalies_df = detect_all_anomalies(df_clean)
-        save_anomalies(anomalies_df)
+        save_anomalies(anomalies_df, output_path=str(output_dir / "anomalies.csv"))
         logger.info(f"Detected {len(anomalies_df)} anomalies")
         
         # Print summary to console
@@ -157,13 +166,13 @@ def main():
         logger.info("Pipeline Complete!")
         logger.info("=" * 60)
         logger.info(f"Output files:")
-        logger.info(f"  - data/raw_combined.csv")
-        logger.info(f"  - data/cleaned_transactions.csv")
-        logger.info(f"  - data/final_transactions.csv")
-        logger.info(f"  - outputs/cleaning_report.json")
-        logger.info(f"  - outputs/eda_results.json")
-        logger.info(f"  - outputs/recurring_payments.csv")
-        logger.info(f"  - outputs/anomalies.csv")
+        logger.info(f"  - {data_dir / 'raw_combined.csv'}")
+        logger.info(f"  - {data_dir / 'cleaned_transactions.csv'}")
+        logger.info(f"  - {data_dir / 'final_transactions.csv'}")
+        logger.info(f"  - {output_dir / 'cleaning_report.json'}")
+        logger.info(f"  - {output_dir / 'eda_results.json'}")
+        logger.info(f"  - {output_dir / 'recurring_payments.csv'}")
+        logger.info(f"  - {output_dir / 'anomalies.csv'}")
         logger.info(f"  - outputs/pipeline.log")
 
     except Exception as e:

@@ -25,6 +25,12 @@ pip install -r requirements.txt
 python src/run_pipeline.py
 ```
 
+Optional profilbezogen:
+
+```bash
+python src/run_pipeline.py --data-dir data/users/mario --output-dir outputs/users/mario
+```
+
 3. Dashboard starten:
 
 ```bash
@@ -33,17 +39,26 @@ streamlit run app.py --server.headless true --browser.gatherUsageStats false --s
 
 ## Wichtige Datenpfade
 
-- Rohimporte (manuell oder UI-Upload): `data/incoming/`
-- Verarbeitete Daten: `data/`
-- Reports: `outputs/`
-- Finale Datengrundlage fuer Dashboard: `data/final_transactions.csv`
+- Profilordner fuer Konten: `data/users/<profil>/`
+- Profil-Rohimporte (manuell oder UI-Upload): `data/users/<profil>/incoming/`
+- Profil-Verarbeitungsdaten: `data/users/<profil>/final_transactions.csv`
+- Profil-Reports: `outputs/users/<profil>/`
+- Legacy-Fallback (alt): `data/incoming/`, `data/final_transactions.csv`, `outputs/`
+
+## Mehrbenutzer-/Mehrkonto-Workflow
+
+- Sidebar-Schalter `Benutzer / Konto` zum Wechseln zwischen Profilen.
+- `Neues Profil anlegen`: erstellt automatisch Daten- und Output-Ordner je Profil.
+- `Profil loeschen` mit Sicherheits-Checkbox (Profil `Mario` ist als Basiskonto geschützt).
+- Profilanzeige im Header ist hervorgehoben und mit lesbarem Namen formatiert.
+- Import und Pipeline laufen immer nur im aktiven Profilkontext.
 
 ## CSV-Import im Dashboard
 
 - Im Dashboard gibt es den Bereich `📥 CSV-Import`.
 - Ablauf:
   1. CSV-Datei auswaehlen
-  2. Datei wird in `data/incoming/` gespeichert
+  2. Datei wird in `data/users/<profil>/incoming/` gespeichert
   3. `Importieren und Auswertung aktualisieren` starten
   4. Pipeline wird ausgefuehrt und Dashboard neu geladen
 
@@ -54,6 +69,11 @@ Hinweis: Reinkopieren einer Datei allein verarbeitet noch nichts. Die Verarbeitu
 - Regeln sind in `src/category_rules.py` priorisiert (erste passende Regel gewinnt).
 - Generische Zahlungsanbieter werden kontextbasiert ueber Verwendungszweck/Buchungstext interpretiert.
 - Spezifische Empfaengerregeln (z. B. Werkstatt, Mobilfunk, Baumarkt, Versicherer) wurden gezielt erweitert.
+- Neu hinzugefuegte Kategorien/Regeln aus der letzten Ueberarbeitung:
+  - `dining.school_meals` (z. B. SFZ CoWerk)
+  - `personal.haircare` (z. B. Salon Schnittpunkt)
+  - verfeinerte Zuordnung fuer Kino (`kinoheld`, `Repp Mediumtechnik`)
+  - verfeinerte Versorger-Zuordnung (`ROEBEN GAS` -> `housing.utilities`)
 
 ## Stand der letzten Ueberarbeitung
 
@@ -61,3 +81,4 @@ Hinweis: Reinkopieren einer Datei allein verarbeitet noch nichts. Die Verarbeitu
 - Dashboard verbessert (Farben, Hovertexte, Zeitraumanzeige, Kontostandverlauf, zusammengefasste Kategorien).
 - Datumsfilter robust (Schnellwahl + gemeinsamer manueller Datumsbereich stabil synchronisiert).
 - Anzeige-/Encoding-Artefakte in Textfeldern entschärft.
+- Mehrprofilbetrieb aktiv: getrennte Datenablage und Auswertung pro Benutzer/Konto.

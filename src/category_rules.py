@@ -70,7 +70,12 @@ CATEGORY_RULES = {
     # --- RESTAURANT / CAFE / ESSEN ----------------------------------------
     'dining.restaurant': {
         'keywords': ['restaurant', 'cafe', 'café', 'gaststätte', 'lokal',
-                     'kantine', 'imbiss', 'bistro', 'eiscafe', 'pizzeria'],
+                     'kantine', 'imbiss', 'bistro', 'eiscafe', 'pizzeria', 'doenerhaus'],
+        'match_type': 'any',
+        'case_sensitive': False,
+    },
+    'dining.school_meals': {
+        'keywords': ['sfz cowerk', 'cowerk', 'schulessen', 'kitaessen', 'mittagessen schule'],
         'match_type': 'any',
         'case_sensitive': False,
     },
@@ -98,7 +103,14 @@ CATEGORY_RULES = {
         'case_sensitive': False,
     },
     'shopping.clothing': {
-        'keywords': ['h&m', 'zara', 'c&a', 'esprit', 'tom tailor', 'gap', 'engbers'],
+        'keywords': ['h&m', 'h+m', 'zara', 'c&a', 'esprit', 'tom tailor', 'gap', 'engbers',
+                     'nkd', 'deichmann', 'reno', 'p + p shoes', 'p+p shoes', 'intersport', 'style', 'kik',
+                     'lederwaren boehm', 'lederwaren böhm'],
+        'match_type': 'any',
+        'case_sensitive': False,
+    },
+    'personal.haircare': {
+        'keywords': ['salon schnittpunkt', 'friseur', 'haarschnitt', 'hair salon'],
         'match_type': 'any',
         'case_sensitive': False,
     },
@@ -111,12 +123,13 @@ CATEGORY_RULES = {
     'shopping.home': {
         'keywords': ['toom', 'obi baumarkt', 'bauhaus', 'hornbach', 'roller',
                      'sonderpreis baumarkt', 'sonderpreis-baumarkt',
-                     'baustoffhandel', 'haustechnik', 'ttl tapeten-teppichbodenland'],
+                     'baustoffhandel', 'haustechnik', 'ttl tapeten-teppichbodenland', 'ikea'],
         'match_type': 'any',
         'case_sensitive': False,
     },
     'shopping.drugstore': {
-        'keywords': ['dm', 'rossmann', 'douglas', 'parfumerie', 'drogerie'],
+        'keywords': ['dm', 'rossmann', 'douglas', 'parfumerie', 'drogerie', 'tedi', 'muller handels',
+                     'maec geiz', 'm.c geiz'],
         'match_type': 'any',
         'case_sensitive': False,
     },
@@ -144,6 +157,13 @@ CATEGORY_RULES = {
         'match_type': 'any',
         'case_sensitive': False,
     },
+    'transport.public': {
+        'keywords': ['regionalverkehr erzgebirge', 'bildungsticket',
+                     'schuelerbildungs ticket', 'schuelerbildungsticket', 'rve',
+                     'deutsche bahn', 'db', 'bahn', 'oepnv', 'busabo'],
+        'match_type': 'any',
+        'case_sensitive': False,
+    },
     'transport.maintenance': {
         'keywords': ['kfz', 'autowerkstatt', 'werkstatt', 'herrmann exklusiv'],
         'match_type': 'any',
@@ -158,7 +178,7 @@ CATEGORY_RULES = {
     },
     'housing.utilities': {
         'keywords': ['strom', 'gas', 'wasser', 'heizung', 'energie',
-                     'versorger', 'stromanbieter', 'stadtwerke'],
+                     'versorger', 'stromanbieter', 'stadtwerke', 'roeben gas', 'roeben'],
         'match_type': 'any',
         'case_sensitive': False,
     },
@@ -170,7 +190,8 @@ CATEGORY_RULES = {
     },
     'housing.taxes': {
         'keywords': ['grundsteuer', 'abfall', 'abfallwirtschaft',
-                     'bundeskasse', 'steuer', 'steuern', 'hauptkasse des freistaates sachsen'],
+                     'bundeskasse', 'steuer', 'steuern', 'hauptkasse des freistaates sachsen',
+                     'grose kreisstadt aue', 'grosse kreisstadt aue'],
         'match_type': 'any',
         'case_sensitive': False,
     },
@@ -249,6 +270,11 @@ CATEGORY_RULES = {
         'keywords': ['booking', 'expedia', 'airbnb', 'hotel', 'reise',
                      'flug', 'urlaub', 'ferien', 'color magic', 'karls tourismus', 'karls markt', 'skiarena eibenstock',
                      'freizeitbad', 'badegaerten eibenstock'],
+        'match_type': 'any',
+        'case_sensitive': False,
+    },
+    'entertainment.hobby': {
+        'keywords': ['thalia', 'kino', 'kinoheld', 'museum', 'event', 'repp mediumtechnik'],
         'match_type': 'any',
         'case_sensitive': False,
     },
@@ -331,6 +357,8 @@ def get_special_patterns():
         Liste von (muster, kategorie) Tupeln.
     """
     return [
+        ('roeben.*gas', 'housing.utilities'),
+        ('paypal.*kinoheld', 'entertainment.hobby'),
         ('lastschrift.*amzn', 'shopping.amazon'),
         ('paypal.*lastschrift', 'payment.paypal'),
         ('allianz.*lebensvers', 'insurance.life'),
@@ -488,6 +516,9 @@ def categorize_generic_provider(text, counterparty="", purpose="", booking_text=
         # Streaming
         if any(kw in context_text for kw in ['netflix', 'spotify', 'disney', 'youtube', 'apple']):
             return 'entertainment.streaming'
+        # Kino / Freizeit
+        if any(kw in context_text for kw in ['kino', 'kinoheld', 'repp mediumtechnik']):
+            return 'entertainment.hobby'
         # Restaurant/Lieferando
         if any(kw in context_text for kw in ['lieferando', 'restaurant', 'pizza', 'döner', 'imbiss']):
             return 'dining.restaurant'

@@ -24,3 +24,9 @@ Thumbs.db
 
 # Cursor local artifacts
 .cursor/
+
+# Profile data (sensitive/generated)
+data/users/*
+!data/users/.gitkeep
+outputs/users/*
+!outputs/users/.gitkeep
