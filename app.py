@@ -6,8 +6,9 @@ Startbefehl: streamlit run app.py
 Abhängigkeiten: pip install streamlit pandas plotly
 """
 
-import sys, os, json
+import sys, os, json, subprocess
 import warnings
+from pathlib import Path
 warnings.filterwarnings('ignore')
 
 try:
@@ -195,6 +196,29 @@ def repair_display_text(value):
         text = text.replace(old, new)
     return text
 
+def ensure_data_structure():
+    """Stellt die Ordnerstruktur fuer Rohimporte sicher."""
+    Path("data").mkdir(exist_ok=True)
+    Path("data/incoming").mkdir(exist_ok=True)
+    Path("outputs").mkdir(exist_ok=True)
+
+def run_pipeline():
+    """Führt die Pipeline aus und gibt (ok, message) zurueck."""
+    try:
+        result = subprocess.run(
+            [sys.executable, "src/run_pipeline.py"],
+            capture_output=True,
+            text=True,
+            cwd=os.getcwd(),
+            timeout=180
+        )
+        if result.returncode == 0:
+            return True, "Pipeline erfolgreich ausgeführt."
+        msg = (result.stderr or result.stdout or "Unbekannter Fehler").strip()
+        return False, msg[-1500:]
+    except Exception as e:
+        return False, str(e)
+
 @st.cache_data
 def load_data():
     data = {'transactions': pd.DataFrame(), 'recurring': pd.DataFrame()}
@@ -262,6 +286,7 @@ def make_filters(df):
         f['qrange'], f['qranges'] = qk, qr
         sd, ed = qr[qk]
     else: sd = ed = pd.Timestamp.today()
+    quick_start, quick_end = pd.Timestamp(sd).date(), pd.Timestamp(ed).date()
     st.sidebar.caption("Oder manuell:")
     if 'date' in df.columns and df['date'].notna().any():
         mind, maxd = df['date'].min().date(), df['date'].max().date()
@@ -269,6 +294,16 @@ def make_filters(df):
         if ed.date() > maxd: ed = pd.Timestamp(maxd)
         if sd.date() < mind: sd = pd.Timestamp(mind)
         if sd > ed: sd, ed = pd.Timestamp(mind), pd.Timestamp(maxd)
+        # WICHTIG: Schnellwahl mit dem tatsaechlich angezeigten (geclippten) Bereich vergleichen.
+        quick_start, quick_end = sd.date(), ed.date()
+        # Wenn sich die Schnellwahl aendert, Datumsbereich aktiv synchronisieren.
+        current_quick_key = f.get('qrange', '')
+        prev_quick_key = st.session_state.get('drange_prev_quick_key', '')
+        if current_quick_key and current_quick_key != prev_quick_key:
+            st.session_state['drange'] = (quick_start, quick_end)
+            st.session_state['drange_last_start'] = quick_start
+            st.session_state['drange_last_end'] = quick_end
+            st.session_state['drange_prev_quick_key'] = current_quick_key
         dr = st.sidebar.date_input(
             "Datumsbereich",
             value=(sd.date(), ed.date()),
@@ -291,8 +326,11 @@ def make_filters(df):
         if start_ts > end_ts:
             start_ts, end_ts = end_ts, start_ts
         f['sd'], f['ed'] = start_ts, end_ts
+        f['use_manual_date'] = (f['sd'].date(), f['ed'].date()) != (quick_start, quick_end)
         st.session_state['drange_last_start'] = f['sd'].date()
         st.session_state['drange_last_end'] = f['ed'].date()
+        if current_quick_key:
+            st.session_state['drange_prev_quick_key'] = current_quick_key
     st.sidebar.markdown("---")
     st.sidebar.subheader("Betrag")
     f['ttype'] = st.sidebar.radio("Typ", ["Alle","Einnahmen","Ausgaben"], horizontal=True)
@@ -331,8 +369,8 @@ def apply_filters(df, f):
     if df.empty: return df
     r = df.copy()
     if 'date' in r.columns:
-        # Manueller Bereich hat Vorrang, Schnellwahl dient nur als Default.
-        if 'sd' in f and 'ed' in f:
+        # Manueller Bereich nur verwenden, wenn er von der Schnellwahl abweicht.
+        if f.get('use_manual_date') and 'sd' in f and 'ed' in f:
             r = r[(r['date']>=f['sd']) & (r['date']<=f['ed'])]
         elif f.get('qrange') and f['qrange'] in f.get('qranges',{}):
             s,e = f['qranges'][f['qrange']]
@@ -691,6 +729,32 @@ def show_table(data, title=""):
 def main():
     st.title("💰 XCash – Finanzübersicht")
     st.caption("Buchungen, Auswertungen und Detailanalyse")
+    ensure_data_structure()
+
+    with st.expander("📥 CSV-Import", expanded=False):
+        st.caption("Neue Konto-CSV hochladen und Datenbestand direkt aktualisieren.")
+        uploaded = st.file_uploader(
+            "CSV-Datei auswählen",
+            type=["csv"],
+            accept_multiple_files=False,
+            key="csv_import_uploader"
+        )
+        if uploaded is not None:
+            target_path = Path("data/incoming") / uploaded.name
+            with open(target_path, "wb") as f:
+                f.write(uploaded.getbuffer())
+            st.success(f"Datei gespeichert: {target_path}")
+            if st.button("Importieren und Auswertung aktualisieren", key="run_import_pipeline"):
+                with st.spinner("Pipeline läuft, bitte kurz warten..."):
+                    ok, msg = run_pipeline()
+                if ok:
+                    st.cache_data.clear()
+                    st.success("Import abgeschlossen. Dashboard wird neu geladen.")
+                    st.rerun()
+                else:
+                    st.error("Import fehlgeschlagen.")
+                    st.code(msg)
+
     data = load_data()
     df = data.get('transactions', pd.DataFrame())
     recurring_df = data.get('recurring', pd.DataFrame())

@@ -33,9 +33,21 @@ streamlit run app.py --server.headless true --browser.gatherUsageStats false --s
 
 ## Wichtige Datenpfade
 
-- Roh-/Ergebnisdaten: `data/`
+- Rohimporte (manuell oder UI-Upload): `data/incoming/`
+- Verarbeitete Daten: `data/`
 - Reports: `outputs/`
 - Finale Datengrundlage fuer Dashboard: `data/final_transactions.csv`
+
+## CSV-Import im Dashboard
+
+- Im Dashboard gibt es den Bereich `📥 CSV-Import`.
+- Ablauf:
+  1. CSV-Datei auswaehlen
+  2. Datei wird in `data/incoming/` gespeichert
+  3. `Importieren und Auswertung aktualisieren` starten
+  4. Pipeline wird ausgefuehrt und Dashboard neu geladen
+
+Hinweis: Reinkopieren einer Datei allein verarbeitet noch nichts. Die Verarbeitung passiert beim Pipeline-Run (ueber den Import-Button oder `python src/run_pipeline.py`).
 
 ## Hinweise zur Kategorisierung
 
@@ -47,5 +59,5 @@ streamlit run app.py --server.headless true --browser.gatherUsageStats false --s
 
 - Kategorie-Qualitaet deutlich verbessert; `uncategorized` stark reduziert.
 - Dashboard verbessert (Farben, Hovertexte, Zeitraumanzeige, Kontostandverlauf, zusammengefasste Kategorien).
-- Datumsfilter robust (manuelle Bereichsauswahl priorisiert und stabilisiert).
+- Datumsfilter robust (Schnellwahl + gemeinsamer manueller Datumsbereich stabil synchronisiert).
 - Anzeige-/Encoding-Artefakte in Textfeldern entschärft.

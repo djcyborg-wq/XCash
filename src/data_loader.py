@@ -30,6 +30,7 @@ class TransactionDataLoader:
             data_dir: Path to directory containing CSV files.
         """
         self.data_dir = Path(data_dir)
+        self.input_dir = self.data_dir / "incoming"
         self.metadata_catalog: List[Dict] = []
         self.combined_df: Optional[pd.DataFrame] = None
         self.source_files: List[str] = []
@@ -43,12 +44,23 @@ class TransactionDataLoader:
         Returns:
             List of Path objects for discovered CSV files.
         """
-        # List all CSV files, but exclude ones that look like output files
-        files = sorted([f for f in self.data_dir.glob(pattern) 
-                       if not f.name.startswith('processed_') 
-                       and not f.name.startswith('cleaned_')
-                       and not f.name.startswith('raw_')])
-        logger.info(f"Discovered {len(files)} CSV files in {self.data_dir}")
+        # Prefer incoming/ for raw imports. Fallback to data/ for legacy setups.
+        def _collect_csvs(base_dir: Path) -> List[Path]:
+            return sorted([
+                f for f in base_dir.glob(pattern)
+                if not f.name.startswith('processed_')
+                and not f.name.startswith('cleaned_')
+                and not f.name.startswith('raw_')
+                and f.name not in {'final_transactions.csv'}
+            ])
+
+        search_dir = self.input_dir if self.input_dir.exists() else self.data_dir
+        files = _collect_csvs(search_dir)
+        if not files and search_dir != self.data_dir:
+            # Legacy fallback: falls incoming leer ist, nutze data/ direkt.
+            search_dir = self.data_dir
+            files = _collect_csvs(search_dir)
+        logger.info(f"Discovered {len(files)} CSV files in {search_dir}")
         for f in files:
             logger.info(f"  - {f.name}")
         return files

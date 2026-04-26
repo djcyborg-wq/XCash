@@ -20,6 +20,9 @@
 
 - Pipeline mehrfach neu ausgefuehrt (`src/run_pipeline.py`), `data/final_transactions.csv` aktualisiert.
 - Ergebnis: `uncategorized` von urspruenglich deutlich hoeher auf nur noch wenige Restfaelle reduziert.
+- Datenstruktur fuer Rohimporte eingefuehrt:
+  - neue Eingangsablage `data/incoming/`
+  - Loader priorisiert `data/incoming/` und faellt bei Bedarf auf `data/` zurueck.
 
 ### Dashboard (`app.py`)
 
@@ -33,7 +36,13 @@
   - lesbare Labels statt technischer Dot-Namen im Alltag
 - Datumsfilter stabilisiert:
   - manueller Bereich priorisiert
-  - ein gemeinsames Datumsbereich-Feld mit robustem Verhalten beim Start-/Ende-Setzen.
+  - ein gemeinsames Datumsbereich-Feld mit robustem Verhalten beim Start-/Ende-Setzen
+  - Schnellwahl und manueller Bereich sauber synchronisiert (kein Blockieren der Schnellwahl mehr).
+- Neuer CSV-Import im Dashboard:
+  - Dateiauswahl direkt im UI
+  - Speichern nach `data/incoming/`
+  - Pipeline-Run aus dem UI
+  - Cache-Reset und Reload nach erfolgreichem Import.
 
 ### Betrieb
 
