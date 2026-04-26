@@ -1,0 +1,7 @@
+counterparty,normalized_counterparty,category,avg_amount,std_amount,occurrences,frequency,first_date,last_date,confidence
+Juliane Neubert,juliane neubert,income.refund,500.0,0.0,12,monthly,2025-05-02,2026-04-01,0.99
+Grose Kreisstadt Aue - Bad Schlema,grose kreisstadt aue bad schlema,housing.taxes,95.15,0.0,4,irregular,2025-05-15,2026-02-16,0.65
+Mandy Franke,mandy franke,subscriptions.membership,59.9,0.0,12,monthly,2025-05-05,2026-04-01,1.0
+IGM Zwickau,igm zwickau,subscriptions.membership,43.28,0.0,3,monthly,2025-05-05,2025-07-03,0.99
+Telefonica Germany GmbH + Co. OHG,telefonica germany,utilities.telecom,30.04,0.15,12,monthly,2025-05-06,2026-04-01,1.0
+ING,ing,fees.bank,1.49,0.0,12,monthly,2025-05-05,2026-04-02,1.0

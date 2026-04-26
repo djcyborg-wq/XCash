@@ -1,0 +1,132 @@
+date,counterparty,category,amount,anomaly_type,severity,reason,confidence
+2026-03-25,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-200.0,category_amount_outlier,medium,"Amount -200.00 EUR deviates from category median -27.98 EUR (MAD=23.79, 4.9x)",0.95
+2025-11-18,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-79.99,category_amount_outlier,medium,"Amount -79.99 EUR deviates from category median -16.99 EUR (MAD=9.00, 4.7x)",0.95
+2025-11-13,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-200.99,category_amount_outlier,medium,"Amount -200.99 EUR deviates from category median -27.98 EUR (MAD=23.79, 4.9x)",0.95
+2025-11-11,Primagas Energie GmbH,housing.utilities,-177.06,category_amount_outlier,medium,"Amount -177.06 EUR deviates from category median -70.00 EUR (MAD=15.00, 4.8x)",0.95
+2025-08-18,PRIMAGAS ENERGIE GMB,housing.utilities,-175.0,category_amount_outlier,medium,"Amount -175.00 EUR deviates from category median -70.00 EUR (MAD=15.00, 4.7x)",0.95
+2025-07-16,PRIMAGAS ENERGIE GMB,housing.utilities,-175.0,category_amount_outlier,medium,"Amount -175.00 EUR deviates from category median -70.00 EUR (MAD=15.00, 4.7x)",0.95
+2026-03-31,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-74.88,category_amount_outlier,medium,"Amount -74.88 EUR deviates from category median -16.99 EUR (MAD=9.00, 4.3x)",0.9338533888888889
+2025-06-09,Netto Marken-Discoun,groceries.supermarket,-317.72,category_amount_outlier,medium,"Amount -317.72 EUR deviates from category median -69.40 EUR (MAD=39.01, 4.3x)",0.9293561650858754
+2025-06-18,Netto Marken-Discoun,groceries.supermarket,-317.2,category_amount_outlier,medium,"Amount -317.20 EUR deviates from category median -69.40 EUR (MAD=39.01, 4.3x)",0.92845706229172
+2025-06-02,Netto Marken-Discoun,groceries.supermarket,-313.16,category_amount_outlier,medium,"Amount -313.16 EUR deviates from category median -69.40 EUR (MAD=39.01, 4.2x)",0.921471725198667
+2025-05-12,Netto Marken-Discoun,groceries.supermarket,-298.32,category_amount_outlier,medium,"Amount -298.32 EUR deviates from category median -69.40 EUR (MAD=39.01, 4.0x)",0.8958127146885413
+2025-09-01,Netto Marken-Discoun,groceries.supermarket,-294.93,category_amount_outlier,medium,"Amount -294.93 EUR deviates from category median -69.40 EUR (MAD=39.01, 3.9x)",0.8899512560881824
+2025-09-11,Mario Neubert,income.refund,2500.0,category_amount_outlier,medium,"Amount 2500.00 EUR deviates from category median 500.00 EUR (MAD=351.43, 3.8x)",0.8838656896919684
+2025-10-17,Netto Marken-Discoun,groceries.supermarket,-289.34,category_amount_outlier,medium,"Amount -289.34 EUR deviates from category median -69.40 EUR (MAD=39.01, 3.8x)",0.8802859010510125
+2025-06-09,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-65.11,category_amount_outlier,medium,"Amount -65.11 EUR deviates from category median -16.99 EUR (MAD=9.00, 3.6x)",0.8606326666666668
+2025-08-15,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-64.99,category_amount_outlier,medium,"Amount -64.99 EUR deviates from category median -16.99 EUR (MAD=9.00, 3.6x)",0.8597333333333333
+2025-06-16,PRIMAGAS ENERGIE GMB,housing.utilities,-150.0,category_amount_outlier,medium,"Amount -150.00 EUR deviates from category median -70.00 EUR (MAD=15.00, 3.6x)",0.8597333333333333
+2025-05-16,PRIMAGAS ENERGIE GMB,housing.utilities,-150.0,category_amount_outlier,medium,"Amount -150.00 EUR deviates from category median -70.00 EUR (MAD=15.00, 3.6x)",0.8597333333333333
+2025-06-03,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-151.94,category_amount_outlier,medium,"Amount -151.94 EUR deviates from category median -27.98 EUR (MAD=23.79, 3.5x)",0.8514544766708702
+2025-12-30,"PayPal (Europe) S.a r.l. et Cie, S.C.A.",payment.paypal,-150.0,category_amount_outlier,medium,"Amount -150.00 EUR deviates from category median -27.98 EUR (MAD=23.79, 3.5x)",0.845954140395124
+2025-11-21,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-149.94,category_amount_outlier,medium,"Amount -149.94 EUR deviates from category median -27.98 EUR (MAD=23.79, 3.5x)",0.8457840269020597
+2025-05-19,Netto Marken-Discoun,groceries.supermarket,-265.93,category_amount_outlier,medium,"Amount -265.93 EUR deviates from category median -69.40 EUR (MAD=39.01, 3.4x)",0.8398089848756729
+2025-08-12,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-62.11,category_amount_outlier,medium,"Amount -62.11 EUR deviates from category median -16.99 EUR (MAD=9.00, 3.4x)",0.8381493333333334
+2025-08-05,Vodafone GmbH,housing.internet,-15.0,category_amount_outlier,medium,"Amount -15.00 EUR deviates from category median -4.99 EUR (MAD=2.00, 3.4x)",0.83758725
+2025-11-26,Porsche Werkzeugbau GmbH,income.salary,5207.68,category_amount_outlier,medium,"Amount 5207.68 EUR deviates from category median 3655.36 EUR (MAD=316.76, 3.3x)",0.8305519534024717
+2025-10-02,Netto Marken-Discoun,groceries.supermarket,-260.53,category_amount_outlier,medium,"Amount -260.53 EUR deviates from category median -69.40 EUR (MAD=39.01, 3.3x)",0.8304721481671365
+2025-07-30,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-59.95,category_amount_outlier,medium,"Amount -59.95 EUR deviates from category median -16.99 EUR (MAD=9.00, 3.2x)",0.8219613333333334
+2025-06-11,Netto Marken-Discoun,groceries.supermarket,-250.66,category_amount_outlier,medium,"Amount -250.66 EUR deviates from category median -69.40 EUR (MAD=39.01, 3.1x)",0.8134064855165342
+2025-11-07,ZV ABWASSER SCHLEMATAL,housing.utilities,-0.54,category_amount_outlier,medium,"Amount -0.54 EUR deviates from category median -70.00 EUR (MAD=15.00, 3.1x)",0.8123384666666666
+2025-11-28,Netto Marken-Discoun,groceries.supermarket,-248.71,category_amount_outlier,medium,"Amount -248.71 EUR deviates from category median -69.40 EUR (MAD=39.01, 3.1x)",0.8100348500384517
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-30.11,merchant_amount_outlier,low,Amount -30.11 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.9
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-24.84,merchant_amount_outlier,low,Amount -24.84 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.9
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-33.47,merchant_amount_outlier,low,Amount -33.47 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.9
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-49.09,merchant_amount_outlier,low,Amount -49.09 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.9
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-26.22,merchant_amount_outlier,low,Amount -26.22 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.9
+2025-10-30,Zweckverband Wasserwerke Westerzgebirge,housing.utilities,-18.84,merchant_amount_outlier,low,Amount -18.84 EUR deviates from merchant median -77.00 EUR (MAD=4.00),0.9
+2025-09-16,PRIMAGAS ENERGIE GMB,income.refund,209.15,merchant_amount_outlier,low,Amount 209.15 EUR deviates from merchant median -162.50 EUR (MAD=12.50),0.9
+2026-04-01,Allianz Lebensversic,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2026-03-02,Allianz Lebensversic,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2026-02-02,Allianz Lebensversic,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2026-01-02,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-12-01,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-11-03,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-10-01,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-09-01,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-08-01,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-07-01,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-06-02,ALLIANZ LEBENSVERS.,insurance.life,-160.42,merchant_amount_outlier,low,Amount -160.42 EUR deviates from merchant median -21.28 EUR (MAD=12.83),0.8876587685113015
+2025-11-24,SONDERPREIS-BAUMARKT SCHNEEBERG,shopping.home,-52.43,merchant_amount_outlier,low,Amount -52.43 EUR deviates from merchant median -21.13 EUR (MAD=3.57),0.7942455648926237
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-17.66,merchant_amount_outlier,low,Amount -17.66 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.7706487247141601
+2026-04-10,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-48.29,merchant_amount_outlier,low,Amount -48.29 EUR deviates from merchant median -13.79 EUR (MAD=4.80),0.7231979166666668
+2025-12-01,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-45.94,merchant_amount_outlier,low,Amount -45.94 EUR deviates from merchant median -13.79 EUR (MAD=4.80),0.7011829861111112
+2026-02-17,"VISA COLOR MAGIC, CO",travel.foreign_card,-14.66,merchant_amount_outlier,low,Amount -14.66 EUR deviates from merchant median -2.04 EUR (MAD=1.90),0.6994613896218118
+2026-04-08,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-43.54,merchant_amount_outlier,low,Amount -43.54 EUR deviates from merchant median -13.79 EUR (MAD=4.80),0.6786996527777779
+2025-06-20,GREENLINE SCHNEEBERG TA,transport.fuel,-47.0,merchant_amount_outlier,low,Amount -47.00 EUR deviates from merchant median -91.02 EUR (MAD=7.50),0.6638943777777778
+2025-06-03,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",income.refund,13.9,merchant_amount_outlier,low,Amount 13.90 EUR deviates from merchant median -13.79 EUR (MAD=4.80),0.6594014583333334
+2025-12-15,SONDERPREIS-BAUMARKT SCHNEEBERG,shopping.home,-40.39,merchant_amount_outlier,low,Amount -40.39 EUR deviates from merchant median -21.13 EUR (MAD=3.57),0.6425932773109244
+2026-02-23,ARAL AG,transport.fuel,-103.01,merchant_amount_outlier,low,Amount -103.01 EUR deviates from merchant median -75.50 EUR (MAD=5.15),0.6402442394822004
+2025-05-23,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-39.36,merchant_amount_outlier,low,Amount -39.36 EUR deviates from merchant median -13.79 EUR (MAD=4.80),0.6395411805555556
+2026-04-22,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-85.0,category_amount_outlier,high,"Amount -85.00 EUR deviates from category median -16.99 EUR (MAD=9.00, 5.1x)",0.95
+2026-04-14,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-88.0,category_amount_outlier,high,"Amount -88.00 EUR deviates from category median -16.99 EUR (MAD=9.00, 5.3x)",0.95
+2026-04-13,toom BM Schneeberg,groceries.discounter,-258.16,category_amount_outlier,high,"Amount -258.16 EUR deviates from category median -39.32 EUR (MAD=23.35, 6.3x)",0.95
+2026-04-07,GREENLINE SCHNEEBERG TA,transport.fuel,-273.66,category_amount_outlier,high,"Amount -273.66 EUR deviates from category median -92.00 EUR (MAD=10.49, 11.7x)",0.95
+2026-04-01,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2026-03-27,ROEBEN GAS GmbH + Co. KG,income.transfer,-2746.23,category_amount_outlier,high,"Amount -2746.23 EUR deviates from category median -326.87 EUR (MAD=296.37, 5.5x)",0.95
+2026-03-02,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2026-02-12,toom BM Schneeberg,groceries.discounter,-222.48,category_amount_outlier,high,"Amount -222.48 EUR deviates from category median -39.32 EUR (MAD=23.35, 5.3x)",0.95
+2026-02-10,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-1031.6,category_amount_outlier,high,"Amount -1031.60 EUR deviates from category median -27.98 EUR (MAD=23.79, 28.5x)",0.95
+2026-02-02,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2026-01-23,"VISA CURSOR, AI POWERED IDE",subscriptions.software,-203.04,category_amount_outlier,high,"Amount -203.04 EUR deviates from category median -20.43 EUR (MAD=19.86, 6.2x)",0.95
+2026-01-22,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-235.95,category_amount_outlier,high,"Amount -235.95 EUR deviates from category median -27.98 EUR (MAD=23.79, 5.9x)",0.95
+2026-01-12,Hauptk.f.FK Schwarzenberg,housing.taxes,-728.11,category_amount_outlier,high,"Amount -728.11 EUR deviates from category median -95.15 EUR (MAD=57.53, 7.4x)",0.95
+2026-01-09,Smartbroker,income.transfer,-1500.0,large_single_transaction,high,Large expense: 1500.00 EUR > 1000 EUR threshold,0.95
+2026-01-02,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2025-12-22,Netto Marken-Discoun,groceries.supermarket,-399.73,category_amount_outlier,high,"Amount -399.73 EUR deviates from category median -69.40 EUR (MAD=39.01, 5.7x)",0.95
+2025-12-08,VISA MS* HOTELZUMHOTHERTOR,travel.foreign_card,-203.1,category_amount_outlier,high,"Amount -203.10 EUR deviates from category median -22.42 EUR (MAD=21.80, 5.6x)",0.95
+2025-12-02,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-396.44,category_amount_outlier,high,"Amount -396.44 EUR deviates from category median -27.98 EUR (MAD=23.79, 10.4x)",0.95
+2025-12-01,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2025-11-27,Porsche Werkzeugbau GmbH,income.salary,14.0,category_amount_outlier,high,"Amount 14.00 EUR deviates from category median 3655.36 EUR (MAD=316.76, 7.8x)",0.95
+2025-11-26,Drillisch Online GmbH,housing.internet,-61.28,category_amount_outlier,high,"Amount -61.28 EUR deviates from category median -4.99 EUR (MAD=2.00, 19.0x)",0.95
+2025-11-25,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-295.0,category_amount_outlier,high,"Amount -295.00 EUR deviates from category median -27.98 EUR (MAD=23.79, 7.6x)",0.95
+2025-11-18,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-339.0,category_amount_outlier,high,"Amount -339.00 EUR deviates from category median -16.99 EUR (MAD=9.00, 24.1x)",0.95
+2025-11-10,Mario Neubert,income.refund,5000.0,category_amount_outlier,high,"Amount 5000.00 EUR deviates from category median 500.00 EUR (MAD=351.43, 8.6x)",0.95
+2025-11-07,Smartbroker,income.transfer,-3000.0,category_amount_outlier,high,"Amount -3000.00 EUR deviates from category median -326.87 EUR (MAD=296.37, 6.1x)",0.95
+2025-11-03,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2025-10-30,DEURAG Deutsche Rech,insurance.life,-484.7,category_amount_outlier,high,"Amount -484.70 EUR deviates from category median -59.55 EUR (MAD=51.10, 5.6x)",0.95
+2025-11-18,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-36.9,possible_duplicate_charge,high,Possible duplicate: -37.75 EUR on 2025-11-18 (diff: 0.85 EUR),0.95
+2025-10-20,Mario Neubert,income.transfer,-2000.0,large_single_transaction,high,Large expense: 2000.00 EUR > 1000 EUR threshold,0.95
+2025-10-14,Mario Neubert,income.transfer,-2500.0,large_single_transaction,high,Large expense: 2500.00 EUR > 1000 EUR threshold,0.95
+2025-10-10,BavariaDirekt Versicherung AG,insurance.car,-329.46,category_amount_outlier,high,"Amount -329.46 EUR deviates from category median -95.53 EUR (MAD=5.30, 29.8x)",0.95
+2025-10-09,Mario Neubert,income.transfer,-10000.0,category_amount_outlier,high,"Amount -10000.00 EUR deviates from category median -326.87 EUR (MAD=296.37, 22.0x)",0.95
+2025-10-09,Mario Neubert,income.refund,15000.0,category_amount_outlier,high,"Amount 15000.00 EUR deviates from category median 500.00 EUR (MAD=351.43, 27.8x)",0.95
+2025-10-07,First Data GmbH,travel.foreign_card,-245.0,category_amount_outlier,high,"Amount -245.00 EUR deviates from category median -22.42 EUR (MAD=21.80, 6.9x)",0.95
+2025-10-01,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2025-12-19,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-2.42,possible_duplicate_charge,high,Possible duplicate: -3.22 EUR on 2025-12-18 (diff: 0.80 EUR),0.95
+2025-09-18,PRIMAGAS,income.transfer,-2101.54,large_single_transaction,high,Large expense: 2101.54 EUR > 1000 EUR threshold,0.95
+2025-09-17,Mario Neubert,income.refund,5000.0,category_amount_outlier,high,"Amount 5000.00 EUR deviates from category median 500.00 EUR (MAD=351.43, 8.6x)",0.95
+2025-09-17,BD24 Berlin Direkt V,insurance.car,-28.8,category_amount_outlier,high,"Amount -28.80 EUR deviates from category median -95.53 EUR (MAD=5.30, 8.5x)",0.95
+2025-09-16,VISA AIRMONTENEGRO.CO,travel.foreign_card,-759.32,category_amount_outlier,high,"Amount -759.32 EUR deviates from category median -22.42 EUR (MAD=21.80, 22.8x)",0.95
+2025-09-16,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-793.0,category_amount_outlier,high,"Amount -793.00 EUR deviates from category median -27.98 EUR (MAD=23.79, 21.7x)",0.95
+2025-09-01,toom BM Schneeberg,groceries.discounter,-332.44,category_amount_outlier,high,"Amount -332.44 EUR deviates from category median -39.32 EUR (MAD=23.35, 8.5x)",0.95
+2026-01-08,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,-3.8,possible_duplicate_charge,high,Possible duplicate: -4.19 EUR on 2026-01-08 (diff: 0.39 EUR),0.95
+2025-09-01,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2026-02-02,VISA CURSOR USAGE MID JAN,subscriptions.software,-0.91,possible_duplicate_charge,high,Possible duplicate: -0.45 EUR on 2026-02-02 (diff: 0.46 EUR),0.95
+2026-02-02,VISA CURSOR USAGE MID JAN,subscriptions.software,-1.33,possible_duplicate_charge,high,Possible duplicate: -0.45 EUR on 2026-02-02 (diff: 0.88 EUR),0.95
+2025-08-13,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-99.36,category_amount_outlier,high,"Amount -99.36 EUR deviates from category median -16.99 EUR (MAD=9.00, 6.2x)",0.95
+2025-08-01,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-0.66,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.08 EUR),0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-0.55,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.19 EUR),0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-0.32,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.42 EUR),0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-0.39,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.35 EUR),0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-0.58,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.16 EUR),0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-0.09,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.65 EUR),0.95
+2026-02-16,"VISA COLOR MAGIC, CO",travel.foreign_card,-1.08,possible_duplicate_charge,high,Possible duplicate: -0.74 EUR on 2026-02-16 (diff: 0.34 EUR),0.95
+2025-07-22,HORNBACH 546 CHEMNITZ,groceries.discounter,-294.66,category_amount_outlier,high,"Amount -294.66 EUR deviates from category median -39.32 EUR (MAD=23.35, 7.4x)",0.95
+2025-07-15,PRIMAGAS ENERGIE GMB,housing.utilities,-197.54,category_amount_outlier,high,"Amount -197.54 EUR deviates from category median -70.00 EUR (MAD=15.00, 5.7x)",0.95
+2025-07-08,First Data GmbH,payment.provider,-1600.72,large_single_transaction,high,Large expense: 1600.72 EUR > 1000 EUR threshold,0.95
+2025-07-01,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2025-06-30,Lastschrift aus Kartenzahlung,payment.card,-1282.55,large_single_transaction,high,Large expense: 1282.55 EUR > 1000 EUR threshold,0.95
+2025-06-24,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-167.95,category_amount_outlier,high,"Amount -167.95 EUR deviates from category median -16.99 EUR (MAD=9.00, 11.3x)",0.95
+2025-06-19,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-298.51,category_amount_outlier,high,"Amount -298.51 EUR deviates from category median -16.99 EUR (MAD=9.00, 21.1x)",0.95
+2025-06-18,PayPal Europe S.a.r.l. et Cie S.C.A,payment.paypal,151.94,category_amount_outlier,high,"Amount 151.94 EUR deviates from category median -27.98 EUR (MAD=23.79, 5.1x)",0.95
+2025-06-11,VISA HOTEL CHRISTOPH,travel.foreign_card,-665.28,category_amount_outlier,high,"Amount -665.28 EUR deviates from category median -22.42 EUR (MAD=21.80, 19.9x)",0.95
+2025-06-04,Porsche Werkzeugbau GmbH,income.salary,582.63,category_amount_outlier,high,"Amount 582.63 EUR deviates from category median 3655.36 EUR (MAD=316.76, 6.5x)",0.95
+2025-06-02,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95
+2025-05-29,AMAZON PAYMENTS EUROPE S.C.A.,shopping.amazon,-199.99,category_amount_outlier,high,"Amount -199.99 EUR deviates from category median -16.99 EUR (MAD=9.00, 13.7x)",0.95
+2025-05-28,Mario Neubert,income.transfer,-13000.0,category_amount_outlier,high,"Amount -13000.00 EUR deviates from category median -326.87 EUR (MAD=296.37, 28.8x)",0.95
+2025-05-28,Hans-Jorg Neubert Elke Neubert,income.refund,10000.0,category_amount_outlier,high,"Amount 10000.00 EUR deviates from category median 500.00 EUR (MAD=351.43, 18.2x)",0.95
+2025-05-27,"AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND",shopping.amazon,-89.99,category_amount_outlier,high,"Amount -89.99 EUR deviates from category median -16.99 EUR (MAD=9.00, 5.5x)",0.95
+2025-05-15,Vodafone GmbH,housing.internet,-50.0,category_amount_outlier,high,"Amount -50.00 EUR deviates from category median -4.99 EUR (MAD=2.00, 15.2x)",0.95
+2025-05-02,Allianz Lebensvers. AG,insurance.life,-652.17,category_amount_outlier,high,"Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",0.95

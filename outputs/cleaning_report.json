@@ -1,0 +1,51 @@
+{
+  "total_records": 753,
+  "duplicates_removed": 19,
+  "duplicates_flagged": 19,
+  "missing_values": {
+    "counterparty": {
+      "count": 734,
+      "percentage": 100.0
+    }
+  },
+  "outliers_flagged": 0,
+  "categories_assigned": 731,
+  "category_distribution": {
+    "groceries.supermarket": 117,
+    "shopping.amazon": 105,
+    "insurance.life": 73,
+    "payment.paypal": 71,
+    "travel.foreign_card": 34,
+    "income.refund": 32,
+    "income.transfer": 32,
+    "housing.utilities": 31,
+    "transport.fuel": 26,
+    "groceries.discounter": 23,
+    "housing.internet": 18,
+    "dining.bakery": 17,
+    "subscriptions.software": 17,
+    "subscriptions.membership": 15,
+    "income.salary": 14,
+    "insurance.car": 14,
+    "fees.bank": 13,
+    "housing.taxes": 13,
+    "utilities.telecom": 12,
+    "shopping.home": 9,
+    "payment.provider": 9,
+    "entertainment.travel": 7,
+    "transport.maintenance": 6,
+    "payment.card": 5,
+    "dining.fast_food": 3,
+    "uncategorized": 3,
+    "banking.transaction": 3,
+    "shopping.online": 2,
+    "dining.restaurant": 2,
+    "transport.toll": 2,
+    "shopping.drugstore": 2,
+    "transfer.private": 1,
+    "income.investment": 1,
+    "entertainment.streaming": 1,
+    "shopping.clothing": 1
+  },
+  "income_corrected": 0
+}

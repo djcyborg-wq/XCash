@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-04-26T18:00:02",
+  "total_anomalies": 131,
+  "anomalies_by_type": {
+    "category_amount_outlier": 84,
+    "merchant_amount_outlier": 29,
+    "possible_duplicate_charge": 12,
+    "large_single_transaction": 6
+  },
+  "anomalies_by_severity": {
+    "high": 72,
+    "medium": 30,
+    "low": 29
+  },
+  "top_high_severity": [
+    {
+      "date": "2026-04-22",
+      "counterparty": "AMAZON PAYMENTS EUROPE S.C.A.",
+      "amount": -85.0,
+      "category": "shopping.amazon",
+      "reason": "Amount -85.00 EUR deviates from category median -16.99 EUR (MAD=9.00, 5.1x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-04-14",
+      "counterparty": "AMAZON PAYMENTS EUROPE S.C.A.",
+      "amount": -88.0,
+      "category": "shopping.amazon",
+      "reason": "Amount -88.00 EUR deviates from category median -16.99 EUR (MAD=9.00, 5.3x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-04-13",
+      "counterparty": "toom BM Schneeberg",
+      "amount": -258.16,
+      "category": "groceries.discounter",
+      "reason": "Amount -258.16 EUR deviates from category median -39.32 EUR (MAD=23.35, 6.3x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-04-07",
+      "counterparty": "GREENLINE SCHNEEBERG TA",
+      "amount": -273.66,
+      "category": "transport.fuel",
+      "reason": "Amount -273.66 EUR deviates from category median -92.00 EUR (MAD=10.49, 11.7x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-04-01",
+      "counterparty": "Allianz Lebensvers. AG",
+      "amount": -652.17,
+      "category": "insurance.life",
+      "reason": "Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-03-27",
+      "counterparty": "ROEBEN GAS GmbH + Co. KG",
+      "amount": -2746.23,
+      "category": "income.transfer",
+      "reason": "Amount -2746.23 EUR deviates from category median -326.87 EUR (MAD=296.37, 5.5x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-03-02",
+      "counterparty": "Allianz Lebensvers. AG",
+      "amount": -652.17,
+      "category": "insurance.life",
+      "reason": "Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-02-12",
+      "counterparty": "toom BM Schneeberg",
+      "amount": -222.48,
+      "category": "groceries.discounter",
+      "reason": "Amount -222.48 EUR deviates from category median -39.32 EUR (MAD=23.35, 5.3x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-02-10",
+      "counterparty": "PayPal Europe S.a.r.l. et Cie S.C.A",
+      "amount": -1031.6,
+      "category": "payment.paypal",
+      "reason": "Amount -1031.60 EUR deviates from category median -27.98 EUR (MAD=23.79, 28.5x)",
+      "confidence": 0.95
+    },
+    {
+      "date": "2026-02-02",
+      "counterparty": "Allianz Lebensvers. AG",
+      "amount": -652.17,
+      "category": "insurance.life",
+      "reason": "Amount -652.17 EUR deviates from category median -59.55 EUR (MAD=51.10, 7.8x)",
+      "confidence": 0.95
+    }
+  ]
+}
